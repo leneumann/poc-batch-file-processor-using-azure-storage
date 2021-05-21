@@ -15,6 +15,7 @@ namespace Worker.Tests
             builder.ConfigureServices(services =>
             {
                 services.AddSingleton<IPublisher, InMemoryCommandProducer>();
+
             });
             builder.ConfigureAppConfiguration(config => config.AddConfiguration(GetCustomConfiguration()));
 

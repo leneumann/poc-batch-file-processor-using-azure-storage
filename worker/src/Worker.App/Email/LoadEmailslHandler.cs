@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Worker.Utils;
 using Worker.Utils.Result;
 
 namespace Worker.App.Email
@@ -39,10 +40,10 @@ namespace Worker.App.Email
         private static async Task<List<string>> CreateChunkOfEmails(StreamReader streamReader)
         {
             var emails = new List<string>();
-            while (emails.Count < 1000 && !streamReader.EndOfStream)
+            while (emails.Count < 100 && !streamReader.EndOfStream)
             {
                 var email = await streamReader.ReadLineAsync().ConfigureAwait(false);
-                if (Regex.IsMatch(email, @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z", RegexOptions.IgnoreCase))
+                if (email.IsValidEmail())
                     emails.Add(email);
             }
 

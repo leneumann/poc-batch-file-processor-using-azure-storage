@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Worker.Infra.AzureStorage.BlobStorage;
+using Worker.Infra.AzureStorage.Queue;
 using Worker.Infra.IoC;
 
 namespace Worker
@@ -27,6 +28,8 @@ namespace Worker
 
             services.AddOptions<BlobStorageOptions>()
                 .Bind(_configuration.GetSection(BlobStorageOptions.BlobStorage));
+            services.AddOptions<AzureQueueOptions>()
+                .Bind(_configuration.GetSection(AzureQueueOptions.AzureQueue));
             //services.AddHealthChecks()
             //    .AddCheck<ExampleHealthCheck>("example_health_check");
             services.AddHostedService<BlobWorker>();

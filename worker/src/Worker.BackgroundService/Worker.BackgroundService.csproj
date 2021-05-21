@@ -29,4 +29,10 @@
     <ProjectReference Include="..\Worker.Infra\Worker.Infra.csproj" />
     <ProjectReference Include="..\Worker.Utils\Worker.Utils.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="appsettings.Development.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 </Project>

@@ -22,6 +22,7 @@ namespace Worker.Infra.AzureStorage.BlobStorage
             try
             {
                 client = new BlobContainerClient(_options.StorageConnectionString, containerName);
+                client.CreateIfNotExists();
             }
             catch (Exception e)
             {

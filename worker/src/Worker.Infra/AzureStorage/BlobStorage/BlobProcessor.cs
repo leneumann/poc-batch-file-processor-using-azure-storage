@@ -45,6 +45,7 @@ namespace Worker.Infra.AzureStorage.BlobStorage
                 var blob = _blobStorage.GetBlobClient(options.Value.ContainerName, item);
                 using var blobStream = await blob.OpenReadAsync(cancellationToken: stoppingToken).ConfigureAwait(false);
                 var result = await handler.HandleAsync(blob.Name, blobStream).ConfigureAwait(false);
+                
                 if (result.HasSucceeded)
                     await _blobStorage.MoveBlobAsync(options.Value.ContainerName, item, leaseId, options.Value.ProcessedBlobs, stoppingToken).ConfigureAwait(false);
                 else await _blobStorage.MoveBlobAsync(options.Value.ContainerName, item, leaseId, options.Value.RejectedBlobs, stoppingToken).ConfigureAwait(false);

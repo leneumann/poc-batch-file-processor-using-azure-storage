@@ -4,9 +4,12 @@ namespace Worker.App.Email
 {
     public class LoadEmailsCommand:ICommand
     {
-        public IReadOnlyList<string> Emails { get; }
+        public List<string> Emails { get; set; }
+        public LoadEmailsCommand()
+        {
 
-        public LoadEmailsCommand(IReadOnlyList<string> emails)
+        }
+        public LoadEmailsCommand(List<string> emails)
         {
             Emails = emails;
         }

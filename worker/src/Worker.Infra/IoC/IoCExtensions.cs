@@ -2,6 +2,7 @@
 using Worker.App;
 using Worker.App.Email;
 using Worker.Infra.AzureStorage.BlobStorage;
+using Worker.Infra.AzureStorage.Queue;
 
 namespace Worker.Infra.IoC
 {
@@ -11,9 +12,10 @@ namespace Worker.Infra.IoC
         {
             return services.AddSingleton<IAzureBlobConnectionFactory, AzureBlobConnectionFactory>()
             .AddSingleton<IAzureBlobStorage, AzureBlobStorage>()
+            .AddSingleton<IAzureQueueConnectionFactory, AzureQueueConnectionFactory>()
             .AddSingleton<IBlobProcessor, BlobProcessor>()
             .AddSingleton<ILoadEmailsHandler, LoadEmailslHandler>()
-            .AddSingleton<IPublisher,InMemoryCommandProducer>();
+            .AddSingleton<IPublisher,AzureQueue>();
         }
     }
 }
